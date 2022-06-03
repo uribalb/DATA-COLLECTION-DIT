@@ -9,3 +9,29 @@
 # 	Libre à chacun de soit implémenter:
 # 		Une fonction
 # 		Ou une classe
+
+import requests
+
+
+def requete(url="https://api.github.com/", methode="get", params=dict(), format="json"):
+    response = None
+    match methode:
+        case "get":
+            response = requests.get(url, params=params)
+        case "post":
+            response = requests.get(url, data=params)
+        case "put":
+            response = requests.put(url, data=params)
+        case "patch":
+            response = requests.patch(url, data=params)
+        case "delete":
+            response = requests.delete(url, data=params)           
+            
+    if format == "text":
+        return response.text
+    else:
+        return response.json()
+            
+            
+            
+print(requete(url="https://api.github.com/", methode="get", format="json"))
